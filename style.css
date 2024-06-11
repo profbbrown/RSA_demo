@@ -1,0 +1,111 @@
+.tab {
+  overflow: hidden;
+  border-bottom: 1px solid #7cb4ee;
+  background-color: #9bccff;
+}
+
+body {
+  margin: 0px;
+  background-color: #9bccff;
+}
+h1 {
+  margin: 0px;
+  padding-left: 8px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+h3 {
+  margin: 0px;
+  padding-top: 20px;
+  padding-left: 8px;
+  padding-bottom: 20px;
+}
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #91c0f0;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #7cb4ee;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  border-top: none;
+}
+
+#titleBar {
+  background-color: #9bccff;
+}
+
+#keyInputArea {
+  background-color: #9bccff;
+  padding-left: 8px;
+}
+
+#reportDiv {
+  background-color: #91c0f0;
+  padding-left: 8px;
+}
+
+.pqmod {
+  background-color: #91c0f0;
+  color: #000;
+  -webkit-text-fill-color: #000;
+  padding-left: 8px;
+}
+
+#encryptionHeading {
+  background-color: #9bccff;
+  padding-left: 8px;
+}
+#keyArea {
+  background-color: #9bccff;
+  padding-left: 8px;
+}
+
+.privpubKey {
+  background-color: #9bccff;
+  color: #000;
+  -webkit-text-fill-color: #000;
+  padding-left: 8px;
+}
+
+#textInArea {
+  background-color: #9bccff;
+  padding-left: 8px;
+}
+
+.privpubInput {
+  background-color: #9bccff;
+  color: #000;
+  -webkit-text-fill-color: #000;
+  padding-left: 8px;
+}
+
+#cipherTextOutArea {
+  background-color: #91c0f0;
+  padding-left: 8px;
+}
+
+.results {
+  background-color: #91c0f0;
+  color: #000;
+  -webkit-text-fill-color: #000;
+  padding-left: 8px;
+}
