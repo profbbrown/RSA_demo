@@ -15,8 +15,8 @@
   <![endif]-->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="jsencrypt.js"></script>
   <script type="text/javascript" src="primeList.js"></script>
   <script type="text/javascript">
@@ -30,7 +30,7 @@
     })();
   </script>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="tab">
@@ -76,7 +76,7 @@
         <textarea type="text" id="p" class="pqmod" rows="2" cols="70" disabled></textarea>
         <br><br>
         Second Prime (q):<br>
-        <textarea type="test" id="q" class="pqmod" rows="2" cols="70" disabled></textarea>
+        <textarea type="text" id="q" class="pqmod" rows="2" cols="70" disabled></textarea>
         <br><br>
         Modulus (p * q):<br>
         <textarea type="text" id="modulus" class="pqmod" rows="4" cols="70" disabled></textarea>
@@ -90,10 +90,12 @@
             <small>
               <textarea id="privkey" class="privpubKey" rows="15" cols="70" disabled></textarea>
             </small>
+            <button id="copyPriv">Copy</button>
           </div>
           <div class="col-lg-6">
             <label for="pubkey">Public Key</label><br/>
             <small><textarea id="pubkey" class="privpubKey" rows="15" cols="70" readonly="readonly" disabled></textarea></small>
+            <button id="copyPub">Copy</button>
           </div>
         </div>
       </div>
@@ -205,6 +207,24 @@
 
         $('#crypted').val(decrypted);
         $('#hex').val()
+      }
+    });
+
+    $("#copyPub").click(function() {
+      $("#pubkey").select();
+      try {
+        navigator.clipboard.writeText($("#pubkey").val());
+      } catch(err) {
+        console.error('Unable to copy');
+      }
+    });
+
+    $("#copyPriv").click(function() {
+      $("#privkey").select();
+      try {
+        navigator.clipboard.writeText($("#privkey").val());
+      } catch(err) {
+        console.error('Unable to copy');
       }
     });
 
