@@ -1,12 +1,12 @@
 .tab {
   overflow: hidden;
-  border-bottom: 1px solid #7cb4ee;
+  border: 1px solid #7cb4ee;
   background-color: #9bccff;
 }
 
 body {
   margin: 0px;
-  background-color: #9bccff;
+  background-color: #ef32c6;
 }
 h1 {
   margin: 0px;
@@ -25,24 +25,31 @@ h3 {
 .tab button {
   background-color: inherit;
   float: left;
-  border: none;
+  border-top:solid 1px #9bccff;
+  border-bottom:solid 1px #9bccff;
+  border-left: solid 1px #9bccff;
+  border-right: solid 1px #9bccff;
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  transition: 0.3s;
   font-size: 17px;
 }
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #91c0f0;
-}
-
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #7cb4ee;
+  background-color: hsl(211, 100%, 80%);
+  
 }
-
+/* Background color when hovering over tab */
+.tab button:hover {
+  background-color:#b7daff
+}
+/* Border color whilst hovering tab */
+.tab button:hover {
+  border-top:solid 1px #0e2d4e;
+  border-bottom:solid 1px #0e2d4e;
+  border-left:solid  1px #0e2d4e;
+  border-right:solid 1px #0e2d4e;
+}
 /* Style the tab content */
 .tabcontent {
   display: none;
@@ -50,61 +57,61 @@ h3 {
 }
 
 #titleBar {
-  background-color: #9bccff;
+  background-color: #ffffff;
 }
 
 #keyInputArea {
-  background-color: #9bccff;
+  background-color: #ffffff;
   padding-left: 8px;
 }
 
 #reportDiv {
-  background-color: #91c0f0;
+  background-color: #ffffff;
   padding-left: 8px;
 }
 
 .pqmod {
-  background-color: #91c0f0;
+  background-color: #ffffff;
   color: #000;
   -webkit-text-fill-color: #000;
   padding-left: 8px;
 }
 
 #encryptionHeading {
-  background-color: #9bccff;
+  background-color: #ffffff;
   padding-left: 8px;
 }
 #keyArea {
-  background-color: #9bccff;
+  background-color: #ffffff;
   padding-left: 8px;
 }
 
 .privpubKey {
-  background-color: #9bccff;
+  background-color: #ffffff;
   color: #000;
   -webkit-text-fill-color: #000;
   padding-left: 8px;
 }
 
 #textInArea {
-  background-color: #9bccff;
+  background-color: #ffffff;
   padding-left: 8px;
 }
 
 .privpubInput {
-  background-color: #9bccff;
+  background-color: #ffffff;
   color: #000;
   -webkit-text-fill-color: #000;
   padding-left: 8px;
 }
 
 #cipherTextOutArea {
-  background-color: #91c0f0;
+  background-color: #ffffff;
   padding-left: 8px;
 }
 
 .results {
-  background-color: #91c0f0;
+  background-color: #ffffff;
   color: #000;
   -webkit-text-fill-color: #000;
   padding-left: 8px;
