@@ -37,8 +37,8 @@
     <div class="panel-body">
       <div class="col-lg-2" id="keyInputArea">
         <div class="input-group mb-3">
-          <label class="input-group-text" for="keysize">Key Size</label>
-          <select class="form-select" id="keysize">
+          <label class="input-group-text" for="key-size">Key Size</label>
+          <select class="form-select" id="key-size">
             <option value="256">256</option>
             <option value="512">512</option>
             <option value="1024" selected>1024</option>
@@ -141,7 +141,7 @@
       var keySize = el.attr('data-value');
       console.log("hello");
       el.click(function (e) {
-        var button = $('#key-size');
+        var button = $('#key-size-obsolete');
         var globalKeySize = keySize;
         button.attr('data-value', keySize);
         button.html(keySize + ' bit <span class="caret"></span>');
