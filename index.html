@@ -215,7 +215,7 @@
       var keySize = parseInt(sKeySize);
       //set the p and q values given from the user
       //get the public exponent
-      var e = $("input[name='pubExp']:checked").val();
+      var e = parseInt($("#public-exponent").val()).toString(16);
 
       var crypt = new JSEncrypt({default_key_size: keySize, default_public_exponent: e});
       var async = $('#async-ck').is(':checked');
@@ -257,7 +257,7 @@
         var keySize = parseInt(sKeySize);
         //set the p and q values given from the user
         //get the public exponent
-        var e = $("input[name='pubExp']:checked").val();
+        var e = parseInt($("#public-exponent").val()).toString(16);
 
         var crypt = new JSEncrypt({default_key_size: keySize, default_public_exponent: e});
         var async = $('#async-ck').is(':checked');
