@@ -17,6 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
   <script type="text/javascript" src="jsencrypt.js"></script>
   <script type="text/javascript" src="primeList.js"></script>
 
@@ -24,135 +25,144 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="tab">
-  <button class="tablinks" onclick="openTabs(event, 'generateKey')" id="defaultOpen">Key Creator</button>
-  <button class="tablinks" onclick="openTabs(event, 'encryptdecrypt')">Encrypt/Decrypt</button>
-</div>
+<header class="navbar navbar-expand-lg bd-navbar sticky-top">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="generateKey-tab" data-bs-toggle="tab" aria-current="page" href="#" data-bs-target="#generateKey-pane" type="button" role="tab" aria-controls="generateKey-pane" aria-selected="true">Key Creator</button>
+    </li>
+    <li>
+      <button class="nav-link" href="#" id="encryptDecrypt-tab" data-bs-toggle="tab" aria-current="page" data-bs-target="#encryptDecrypt-pane" type="button" role="tab" aria-controls="encryptDecrypt-pane" aria-selected="false">Encrypt/Decrypt</button>
+    </li>
+  </ul>
+</header>
 
-<div class="container">
-  <div class="tabcontent" id="generateKey">
-  <div class="row">
-  <div class="panel panel-default">
-    <div class="panel-heading" id="titleBar"><h1>Online RSA Key Generator</h1></div>
-    <div class="panel-body">
-      <div class="col-lg-2" id="keyInputArea">
-        <div class="input-group mb-3">
-          <label class="input-group-text" for="key-size">Key Size</label>
-          <select class="form-select" id="key-size">
-            <option value="256">256</option>
-            <option value="512">512</option>
-            <option value="1024" selected>1024</option>
-            <option value="2048">2048</option>
-            <option value="4096">4096</option>
-          </select>
-        </div>
+<div class="tab-content" id="myTabContent">
+<main id="generateKey-pane" class="bd-main order-1 tab-pane show active">
+  <div class="bd-content pg-lg-2" id="generateKey">
+    <div class="mb-3 mb-md-0 d-flex text-nowrap">
+      <h1 class="bd-title mb-0">RSA Key Generator</h1>
+    </div>
 
-        <!-- Public Exponent -->
-        <div class="input-group mb-3">
-          <label class="input-group-text" for="public-exponent">Public exponent</label>
-          <select class="form-select" id="public-exponent">
-            <option value="65537">65537 (default)</option>
-          </select>
-        </div>
 
-        <button id="generate" class="btn btn-primary">Generate Keys</button>
-        <br>
-        <span id="loading"><img src='loading.gif'></span>
-        <br>&nbsp;<br>
-        <span><i><small id="time-report"></small></i></span>
-        <br>&nbsp;<br>
+    <div class="col-lg-2" id="keyInputArea">
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="key-size">Key Size</label>
+        <select class="form-select" id="key-size">
+          <option value="256">256</option>
+          <option value="512">512</option>
+          <option value="1024" selected>1024</option>
+          <option value="2048">2048</option>
+          <option value="4096">4096</option>
+        </select>
       </div>
+
+      <!-- Public Exponent -->
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="public-exponent">Public exponent</label>
+        <select class="form-select" id="public-exponent">
+          <option value="65537">65537 (default)</option>
+        </select>
+      </div>
+
+      <button id="generate" class="btn btn-primary">Generate Keys</button>
+      <br>
+      <span id="loading"><img src='loading.gif'></span>
+      <br>&nbsp;<br>
+      <span><i><small id="time-report"></small></i></span>
+      <br>&nbsp;<br>
+
       <!-- The values the program created -->
-       <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+      <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
         <small class="font-monospace text-body-secondary">First Prime (p)</small>
         <div classs="d-flex ms-auto">
-          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard">
+          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#p">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
               <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
               <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
             </svg>
           </button>
         </div>
-       </div>
-       <div class="highlight">
-        <textarea type="text" id="p" rows="4" cols="80" disabled>
+      </div>
+      <div class="highlight">
+        <textarea type="text" class="font-monospace" id="p" rows="4" cols="80" readonly>
 
         </textarea>
-       </div>
+      </div>
 
-       <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+      <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
         <small class="font-monospace text-body-secondary">Second Prime (q)</small>
         <div classs="d-flex ms-auto">
-          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard">
+          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#q">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
               <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
               <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
             </svg>
           </button>
         </div>
-       </div>
-       <div class="highlight">
-        <textarea type="text" id="q" rows="4" cols="80" disabled>
+      </div>
+      <div class="highlight">
+        <textarea type="text" class="font-monospace" id="q" rows="4" cols="80" readonly>
 
         </textarea>
-       </div>
+      </div>
 
-       <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+      <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
         <small class="font-monospace text-body-secondary">Modulus (p*q)</small>
         <div classs="d-flex ms-auto">
-          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard">
+          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#modulus">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
               <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
               <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
             </svg>
           </button>
         </div>
-       </div>
-       <div class="highlight">
-        <textarea type="text" id="modulus" rows="6" cols="80" disabled>
+      </div>
+      <div class="highlight">
+        <textarea type="text" class="font-monospace" id="modulus" rows="6" cols="80" readonly>
 
         </textarea>
-       </div>
+      </div>
 
-       <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+      <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
         <small class="font-monospace text-body-secondary">Private Key</small>
         <div classs="d-flex ms-auto">
-          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard">
+          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#privkey">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
               <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
               <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
             </svg>
           </button>
         </div>
-       </div>
-       <div class="highlight">
-        <textarea type="text" id="privkey" rows="6" cols="80" disabled>
+      </div>
+      <div class="highlight">
+        <textarea type="text" class="font-monospace" id="privkey" rows="6" cols="80" readonly>
 
         </textarea>
-       </div>
+      </div>
 
-       <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+      <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
         <small class="font-monospace text-body-secondary">Public Key</small>
         <div classs="d-flex ms-auto">
-          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard">
+          <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#pubkey">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
               <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
               <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
             </svg>
           </button>
         </div>
-       </div>
-       <div class="highlight">
-        <textarea type="text" id="pubkey" rows="6" cols="80" disabled>
+      </div>
+      <div class="highlight">
+        <textarea type="text" class="font-monospace" id="pubkey" rows="6" cols="80" readonly>
 
         </textarea>
        </div>
     </div>
   </div>
-</div>
-</div>
+
+
+</main>
 <!-- start encrypt decrypt section -->
-<div class="tabcontent" id="encryptdecrypt">
+<div class="tab-pane" id="encryptDecrypt-pane" role="tabpanel" tabindex="0">
 <div class="row">
   <div class="panel panel-default">
     <div class="panel-heading" id="encryptionHeading"><h3>RSA Encryption Test</h3></div>
@@ -190,26 +200,65 @@
   </div>
 </div>
 </div>
+</div>
+
 <script type="text/javascript">
-  $(function () {
-    //Change the key size value for new keys
-    $(".change-key-size").each(function (index, value) {
-      var el = $(value);
-      var keySize = el.attr('data-value');
-      console.log("hello");
-      el.click(function (e) {
-        var button = $('#key-size-obsolete');
-        var globalKeySize = keySize;
-        button.attr('data-value', keySize);
-        button.html(keySize + ' bit <span class="caret"></span>');
-        e.preventDefault();
-      });
-    });
+var generatePrimeList = function () {
+  var primeList = showMePrimes();
+  for(i = 0; i < primeList.length; i++) {
+    $('#public-exponent').append("<option>" + primeList[i] + "</option>");
+  }
+};
+
+var generateKeys = function () {
+  var sKeySize = $('#key-size').val();
+  var keySize = parseInt(sKeySize);
+  //set the p and q values given from the user
+  //get the public exponent
+  var e = parseInt($("#public-exponent").val()).toString(16);
+
+  var crypt = new JSEncrypt({default_key_size: keySize, default_public_exponent: e});
+  var async = $('#async-ck').is(':checked');
+  var dt = new Date();
+  var time = -(dt.getTime());
+  if (async) {
+    $('#time-report').text('.');
+    var load = setInterval(function () {
+      var text = $('#time-report').text();
+      $('#time-report').text(text + '.');
+    }, 500);
     
+    crypt.getKey(function () {
+      clearInterval(load);
+      dt = new Date();
+      time += (dt.getTime());
+      $('#time-report').text('Generated in ' + time + ' ms');
+      $('#privkey').val(crypt.getPrivateKey());
+      $('#pubkey').val(crypt.getPublicKey());
+    });
+  return;
+  }
+      
+  crypt.getKey();
+  dt = new Date();
+  time += (dt.getTime());
+  $('#time-report').text('Generated in ' + time + ' ms');
+  $('#privkey').val(crypt.getPrivateKey());
+  $('#pubkey').val(crypt.getPublicKey());
+  $('#p').val(crypt.getP());
+  $('#q').val(crypt.getQ());
+  $('#modulus').val(crypt.getN());
+};
+
+
+$(function () {
+  new ClipboardJS('.btn-clipboard');
+    
+  $('#loading').hide();
+      
     // Execute when they click the encrypt/decrypt button.
     //Changing this function
     $('#execute').click(function () {
-
       // Create the encryption object.
       var crypt = new JSEncrypt();
       // Set the private.
@@ -258,55 +307,6 @@
       }
     });
 
-    var generatePrimeList = function () {
-      var primeList = showMePrimes();
-      for(i = 0; i < primeList.length; i++)
-      {
-        $('#public-exponent').append("<option>" + primeList[i] + "</option>");
-      }
-
-    };
-    //Executed when generate new keys is clicked
-    var generateKeys = function () {
-      var sKeySize = $('#key-size').val();
-      var keySize = parseInt(sKeySize);
-      //set the p and q values given from the user
-      //get the public exponent
-      var e = parseInt($("#public-exponent").val()).toString(16);
-
-      var crypt = new JSEncrypt({default_key_size: keySize, default_public_exponent: e});
-      var async = $('#async-ck').is(':checked');
-      var dt = new Date();
-      var time = -(dt.getTime());
-      if (async) {
-        $('#time-report').text('.');
-        var load = setInterval(function () {
-          var text = $('#time-report').text();
-          $('#time-report').text(text + '.');
-        }, 500);
-        crypt.getKey(function () {
-          clearInterval(load);
-          dt = new Date();
-          time += (dt.getTime());
-          $('#time-report').text('Generated in ' + time + ' ms');
-          $('#privkey').val(crypt.getPrivateKey());
-          $('#pubkey').val(crypt.getPublicKey());
-        });
-        return;
-      }
-      crypt.getKey();
-      dt = new Date();
-      time += (dt.getTime());
-      $('#time-report').text('Generated in ' + time + ' ms');
-      $('#privkey').val(crypt.getPrivateKey());
-      $('#pubkey').val(crypt.getPublicKey());
-      $('#p').val(crypt.getP());
-      $('#q').val(crypt.getQ());
-      $('#modulus').val(crypt.getN());
-    };
-
-    $('#loading').hide();
-    
     $('#generate').click( function() {
       $('#loading').show();
       setTimeout(function() {
@@ -348,11 +348,11 @@
         $('#loading').hide();
       }, 0);
     });
-    generatePrimeList();
-    document.getElementById("defaultOpen").click();
-  });
-</script>
 
-</div>
+  generatePrimeList();
+  document.getElementById("defaultOpen").click();
+
+});
+</script>
 </body>
 </html>
