@@ -74,6 +74,21 @@ h3 {
   background-color: var(--bd-pre-bg);
 }
 
+.key-param {
+  margin-bottom: 1rem;
+  border: solid var(--bs-border-color);
+  width: 768px;
+}
+
+@media (min-width: 768px) {
+  .key-param {
+    margin-right: 0;
+    margin-left: 0;
+    border-width: 1px;
+    border-radius: var(--bs-border-radius);
+  }
+}
+
 #titleBar {
   background-color: #ffffff;
 }
