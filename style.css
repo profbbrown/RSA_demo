@@ -1,13 +1,13 @@
 .tab {
   overflow: hidden;
   border: 1px solid #7cb4ee;
-  background-color: #9bccff;
+  background-color: #ffffff;
 }
 
 body {
   margin: 0px;
-  background-color: #ef32c6;
 }
+
 h1 {
   margin: 0px;
   padding-left: 8px;
@@ -54,6 +54,24 @@ h3 {
 .tabcontent {
   display: none;
   border-top: none;
+}
+
+.btn-clipboard {
+  position: relative;
+  z-index: 2;
+  display: block;
+  padding: .5em;
+  border: 0;
+  float: right;
+}
+
+.highlight {
+  position: relative;
+  background-color: var(--bd-pre-bg);
+}
+
+.highlight-toolbar {
+  background-color: var(--bd-pre-bg);
 }
 
 #titleBar {
