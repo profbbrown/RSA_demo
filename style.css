@@ -89,6 +89,7 @@ h3 {
 #keyInputArea {
   background-color: #ffffff;
   padding-left: 8px;
+  width: 22em;
 }
 
 #reportDiv {
@@ -145,4 +146,8 @@ h3 {
 
 .key-param-group {
   margin-bottom: 12px;
+}
+
+.key-param-value textarea {
+  width: 100%;
 }
