@@ -142,3 +142,7 @@ h3 {
   -webkit-text-fill-color: #000;
   padding-left: 8px;
 }
+
+.key-param-group {
+  margin-bottom: 12px;
+}
