@@ -77,16 +77,9 @@ h3 {
 .key-param {
   margin-bottom: 1rem;
   border: solid var(--bs-border-color);
-  width: 768px;
-}
-
-@media (min-width: 768px) {
-  .key-param {
-    margin-right: 0;
-    margin-left: 0;
-    border-width: 1px;
-    border-radius: var(--bs-border-radius);
-  }
+  width: 800px;
+  border-radius: var(--bs-border-radius);
+  border-width: 1px;
 }
 
 #titleBar {
