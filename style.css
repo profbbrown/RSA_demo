@@ -1,13 +1,13 @@
 .tab {
   overflow: hidden;
   border: 1px solid #7cb4ee;
-  background-color: #9bccff;
+  background-color: #ffffff;
 }
 
 body {
   margin: 0px;
-  background-color: #ef32c6;
 }
+
 h1 {
   margin: 0px;
   padding-left: 8px;
@@ -56,6 +56,32 @@ h3 {
   border-top: none;
 }
 
+.btn-clipboard {
+  position: relative;
+  z-index: 2;
+  display: block;
+  padding: .5em;
+  border: 0;
+  float: right;
+}
+
+.highlight {
+  position: relative;
+  background-color: var(--bd-pre-bg);
+}
+
+.highlight-toolbar {
+  background-color: var(--bd-pre-bg);
+}
+
+.key-param {
+  margin-bottom: 1rem;
+  border: solid var(--bs-border-color);
+  width: 800px;
+  border-radius: var(--bs-border-radius);
+  border-width: 1px;
+}
+
 #titleBar {
   background-color: #ffffff;
 }
@@ -63,6 +89,7 @@ h3 {
 #keyInputArea {
   background-color: #ffffff;
   padding-left: 8px;
+  width: 22em;
 }
 
 #reportDiv {
@@ -115,4 +142,12 @@ h3 {
   color: #000;
   -webkit-text-fill-color: #000;
   padding-left: 8px;
+}
+
+.key-param-group {
+  margin-bottom: 12px;
+}
+
+.key-param-value textarea {
+  width: 100%;
 }

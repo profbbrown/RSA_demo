@@ -3,7 +3,7 @@
 <head>
   <!-- Majority of this code was from JSEncrypt. -->
   <!-- Additional features such as private key encryption, public key decryption, and displaying the results in hex were written by Michael Rose -->
-  <title>Online RSA Key Generator</title>
+  <title>RSA Key Generator</title>
   <!--<base id="basetag" href="/jsencrypt/">-->
   <!--[if IE]>
   <script type='text/javascript'>
@@ -17,149 +17,253 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
   <script type="text/javascript" src="jsencrypt.js"></script>
   <script type="text/javascript" src="primeList.js"></script>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-450670-2']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+
   <link rel="stylesheet" type="text/css" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="tab">
-  <button class="tablinks" onclick="openTabs(event, 'generateKey')" id="defaultOpen">Key Creator</button>
-  <button class="tablinks" onclick="openTabs(event, 'encryptdecrypt')">Encrypt/Decrypt</button>
+  <div class="container-sm" id="body-container">
+    <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+      <ul class="nav nav-tabs" id="header-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="generateKey-tab" data-bs-toggle="tab" aria-current="page" href="#" data-bs-target="#generateKey-pane" type="button" role="tab" aria-controls="generateKey-pane" aria-selected="true">Key Creator</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" href="#" id="encryptDecrypt-tab" data-bs-toggle="tab" aria-current="page" data-bs-target="#encryptDecrypt-pane" type="button" role="tab" aria-controls="encryptDecrypt-pane" aria-selected="false">Encrypt/Decrypt</button>
+        </li>
+      </ul>
+    </header>
+
+    <main>
+      <div class="tab-content" id="my-tab-content">
+        <div class="tab-pane show active" id="generateKey-pane">
+          <div class="d-flex text-nowrap">
+            <h1>RSA Key Generator</h1>
+          </div>
+
+          <div id="keyInputArea">
+            <div class="input-group key-param-group">
+              <label class="input-group-text" for="key-size">Key Size</label>
+              <select class="form-select" id="key-size">
+                <option value="256">256</option>
+                <option value="512">512</option>
+                <option value="1024" selected>1024</option>
+                <option value="2048">2048</option>
+                <option value="4096">4096</option>
+              </select>
+            </div>
+
+            <!-- Public Exponent -->
+            <div class="input-group key-param-group">
+              <label class="input-group-text" for="public-exponent">Public exponent</label>
+              <select class="form-select" id="public-exponent">
+                <option value="65537">65537 (default)</option>
+                <!-- More options filled in by JS -->
+              </select>
+            </div>
+
+            <button id="generate" class="btn btn-primary">Generate Keys</button>
+            <br>
+            <div id="loading"><img src='loading.gif'></div>
+            <br>&nbsp;<br>
+            <div id="time-report"><i><small></small></i></div>
+            <br>&nbsp;<br>
+          </div>
+
+            <!-- The values the program created -->
+          <div id="key-param-area">
+            <div class="key-param highlight">
+              <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+                <label class="font-monospace text-body-secondary" for="#p">First Prime (p)</label>
+                <div class="d-flex ms-auto">
+                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#p">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="p" rows="4" readonly></textarea>
+              </div>
+            </div>
+
+            <div class="key-param highlight">
+              <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+                <label for="#q" class="font-monospace text-body-secondary">Second Prime (q)</label>
+                <div class="d-flex ms-auto">
+                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#q">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="q" rows="4" readonly></textarea>
+              </div>
+            </div>
+
+            <div class="key-param highlight">
+              <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+                <label for="#modulus" class="font-monospace text-body-secondary">Modulus (p*q)</label>
+                <div class="d-flex ms-auto">
+                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#modulus">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="modulus" rows="6" readonly></textarea>
+              </div>
+            </div>
+
+            <div class="key-param highlight">
+              <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+                <label for="#privkey" class="font-monospace text-body-secondary">Private Key</label>
+                <div class="d-flex ms-auto">
+                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#privkey">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="privkey" rows="6" readonly></textarea>
+              </div>
+            </div>
+
+            <div class="key-param highlight">
+              <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+                <label for="#pubkey" class="font-monospace text-body-secondary">Public Key</label>
+                <div class="d-flex ms-auto">
+                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#pubkey">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="pubkey" rows="6" readonly></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- start encrypt decrypt section -->
+        <div class="tab-pane" id="encryptDecrypt-pane" role="tabpanel" tabindex="0">
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading" id="encryptionHeading"><h3>RSA Encryption Test</h3></div>
+            <div class="panel-body">
+              <div id="textInArea">
+                <div class="col-lg-5">
+                  <label>Paste Key Here:</label><br/>
+                  <textarea id="privkeyInput" class="privpubInput font-monospace" rows="15" cols="70"></textarea>
+                </div>
+                <div class="col-lg-5">
+                  <label for="input">Paste plain text here:</label><br/>
+                  <textarea id="input" name="input" class="font-monospace privpubInput" cols="70" rows="4"></textarea>
+                </div>
+                <div class="col-lg-5">
+                  <label for="inputctext">Paste cipher text here:</label><br/>
+                  <textarea id="inputctext" name="inputctext" class="privpubInput font-monospace" cols="70" rows="4"></textarea>
+                </div>
+                <div class="col-lg-2">
+                  <label>&nbsp;</label><br/>
+                  <button id="execute" class="btn btn-primary">Encrypt / Decrypt</button>
+                </div>
+              </div>
+              <div id="cipherTextOutArea">
+                
+                <div class="col-lg-5">
+                  <label for="crypted">Result (base64):</label><br/>
+                  <textarea id="crypted" class="results font-monospace" name="crypted" cols="70" rows="4" disabled></textarea>
+                </div>
+                <div class="col-lg-5">
+                  <label for="hex">Result (hex):</label><br/>
+                  <textarea id="hex" class="results font-monospace" name="hex" cols="70" rows="4" disabled></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  </div>
+  </main>
 </div>
 
-<div class="container">
-  <div class="tabcontent" id="generateKey">
-  <div class="row">
-  <div class="panel panel-default">
-    <div class="panel-heading" id="titleBar"><h1>Online RSA Key Generator</h1></div>
-    <div class="panel-body">
-      <div class="col-lg-2" id="keyInputArea">
-        <div class="btn-group">
-          <div class="input-group">
-            <span class="input-group-addon">Choose Key Size</span>
-            <select id="key-size">
-              <option value="256">256</option>
-              <option value="512">512</option>
-              <option value="1024" selected="selected">1024</option>
-              <option value="2048">2048</option>
-              <option value="4096">4096</option>
-            </select>
-          </div>
-        </div>
-        <br>&nbsp;<br>
-        <!--Input goes here -->
-        <h2>Select a public exponent</h2>
-        <span id="primeList"></span>
-        <br><br>
-        <button id="generate" class="btn btn-primary">Generate Keys</button>
-        <br>
-        <span id="loading"><img src='loading.gif'></span>
-        <br>&nbsp;<br>
-        <span><i><small id="time-report"></small></i></span>
-        <br>&nbsp;<br>
-      </div>
-      <!-- The values the program created -->
-      <div id="reportDiv">
-      <span id="report">
-        First Prime (p):<br>
-        <textarea type="text" id="p" class="pqmod" rows="2" cols="70" disabled></textarea>
-        <br><br>
-        Second Prime (q):<br>
-        <textarea type="test" id="q" class="pqmod" rows="2" cols="70" disabled></textarea>
-        <br><br>
-        Modulus (p * q):<br>
-        <textarea type="text" id="modulus" class="pqmod" rows="4" cols="70" disabled></textarea>
-        <br><br>
-      </span>
-      </div>
-      <div class="col-lg-10" id="keyArea">
-        <div class="row">
-          <div class="col-lg-6">
-            <label for="privkey">Private Key</label><br/>
-            <small>
-              <textarea id="privkey" class="privpubKey" rows="15" cols="70" disabled></textarea>
-            </small>
-          </div>
-          <div class="col-lg-6">
-            <label for="pubkey">Public Key</label><br/>
-            <small><textarea id="pubkey" class="privpubKey" rows="15" cols="70" readonly="readonly" disabled></textarea></small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<!-- start encrypt decrypt section -->
-<div class="tabcontent" id="encryptdecrypt">
-<div class="row">
-  <div class="panel panel-default">
-    <div class="panel-heading" id="encryptionHeading"><h3>RSA Encryption Test</h3></div>
-    <div class="panel-body">
-      <div id="textInArea">
-        <div class="col-lg-5">
-          <label>Paste Key Here:</label><br/>
-          <textarea id="privkeyInput" class="privpubInput" rows="15" cols="70"></textarea>
-        </div>
-        <div class="col-lg-5">
-          <label for="input">Paste text here:</label><br/>
-          <textarea id="input" name="input" class="privpubInput" cols="70" rows="4"></textarea>
-        </div>
-        <div class="col-lg-5">
-          <label for="inputctext">Paste cipher text here:</label><br/>
-          <textarea id="inputctext" name="inputctext" class="privpubInput" cols="70" rows="4"></textarea>
-        </div>
-        <div class="col-lg-2">
-          <label>&nbsp;</label><br/>
-          <button id="execute" class="btn btn-primary">Encrypt / Decrypt</button>
-        </div>
-      </div>
-      <div id="cipherTextOutArea">
-        
-        <div class="col-lg-5">
-          <label for="crypted">Result:</label><br/>
-          <textarea id="crypted" class="results" name="crypted" cols="70" rows="4" disabled></textarea>
-        </div>
-        <div class="col-lg-5">
-          <label for="hex">Result (hex):</label><br/>
-          <textarea id="hex" class="results" name="hex" cols="70" rows="4" disabled></textarea>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+
 <script type="text/javascript">
-  $(function () {
-    //Change the key size value for new keys
-    $(".change-key-size").each(function (index, value) {
-      var el = $(value);
-      var keySize = el.attr('data-value');
-      console.log("hello");
-      el.click(function (e) {
-        var button = $('#key-size');
-        var globalKeySize = keySize;
-        button.attr('data-value', keySize);
-        button.html(keySize + ' bit <span class="caret"></span>');
-        e.preventDefault();
-      });
-    });
+var generatePrimeList = function () {
+  var primeList = showMePrimes();
+  for(i = 0; i < primeList.length; i++) {
+    $('#public-exponent').append("<option>" + primeList[i] + "</option>");
+  }
+};
+
+var generateKeys = function () {
+  var sKeySize = $('#key-size').val();
+  var keySize = parseInt(sKeySize);
+  //set the p and q values given from the user
+  //get the public exponent
+  var e = parseInt($("#public-exponent").val()).toString(16);
+
+  var crypt = new JSEncrypt({default_key_size: keySize, default_public_exponent: e});
+  var async = $('#async-ck').is(':checked');
+  var dt = new Date();
+  var time = -(dt.getTime());
+  if (async) {
+    $('#time-report').text('.');
+    var load = setInterval(function () {
+      var text = $('#time-report').text();
+      $('#time-report').text(text + '.');
+    }, 500);
     
+    crypt.getKey(function () {
+      clearInterval(load);
+      dt = new Date();
+      time += (dt.getTime());
+      $('#time-report').text('Generated in ' + time + ' ms');
+      $('#privkey').val(crypt.getPrivateKey());
+      $('#pubkey').val(crypt.getPublicKey());
+    });
+  return;
+  }
+      
+  crypt.getKey();
+  dt = new Date();
+  time += (dt.getTime());
+  $('#time-report').text('Generated in ' + time + ' ms');
+  $('#privkey').val(crypt.getPrivateKey());
+  $('#pubkey').val(crypt.getPublicKey());
+  $('#p').val(crypt.getP());
+  $('#q').val(crypt.getQ());
+  $('#modulus').val(crypt.getN());
+};
+
+
+$(function () {
+  new ClipboardJS('.btn-clipboard');
+    
+  $('#loading').hide();
+      
     // Execute when they click the encrypt/decrypt button.
     //Changing this function
     $('#execute').click(function () {
-
       // Create the encryption object.
       var crypt = new JSEncrypt();
       // Set the private.
@@ -208,65 +312,6 @@
       }
     });
 
-    var generatePrimeList = function () {
-      $('#primeList').html('');
-      $('#primeList').append("Use the default: ");
-      $('#primeList').append("<input type='radio' name='pubExp' value='010001' checked='checked'>65537<br>");
-      $('#primeList').append("Or choose your own: <br>");
-      //create an array from the showMePrimes function in primeList.js
-      var setList = showMePrimes();
-      for(i = 1; i <= 10; i++)
-      {
-        $('#primeList').append("<input type='radio' name='pubExp' value="+setList[i-1].toString(16)+">" + setList[i-1]);
-        if(i%5 == 0)
-        {
-          $('#primeList').append("<br>");
-        }
-
-      }
-
-    };
-    //Executed when generate new keys is clicked
-    var generateKeys = function () {
-      var sKeySize = $('#key-size').val();
-      var keySize = parseInt(sKeySize);
-      //set the p and q values given from the user
-      //get the public exponent
-      var e = $("input[name='pubExp']:checked").val();
-
-      var crypt = new JSEncrypt({default_key_size: keySize, default_public_exponent: e});
-      var async = $('#async-ck').is(':checked');
-      var dt = new Date();
-      var time = -(dt.getTime());
-      if (async) {
-        $('#time-report').text('.');
-        var load = setInterval(function () {
-          var text = $('#time-report').text();
-          $('#time-report').text(text + '.');
-        }, 500);
-        crypt.getKey(function () {
-          clearInterval(load);
-          dt = new Date();
-          time += (dt.getTime());
-          $('#time-report').text('Generated in ' + time + ' ms');
-          $('#privkey').val(crypt.getPrivateKey());
-          $('#pubkey').val(crypt.getPublicKey());
-        });
-        return;
-      }
-      crypt.getKey();
-      dt = new Date();
-      time += (dt.getTime());
-      $('#time-report').text('Generated in ' + time + ' ms');
-      $('#privkey').val(crypt.getPrivateKey());
-      $('#pubkey').val(crypt.getPublicKey());
-      $('#p').val(crypt.getP());
-      $('#q').val(crypt.getQ());
-      $('#modulus').val(crypt.getN());
-    };
-
-    $('#loading').hide();
-    
     $('#generate').click( function() {
       $('#loading').show();
       setTimeout(function() {
@@ -274,7 +319,7 @@
         var keySize = parseInt(sKeySize);
         //set the p and q values given from the user
         //get the public exponent
-        var e = $("input[name='pubExp']:checked").val();
+        var e = parseInt($("#public-exponent").val()).toString(16);
 
         var crypt = new JSEncrypt({default_key_size: keySize, default_public_exponent: e});
         var async = $('#async-ck').is(':checked');
@@ -308,11 +353,11 @@
         $('#loading').hide();
       }, 0);
     });
-    generatePrimeList();
-    document.getElementById("defaultOpen").click();
-  });
-</script>
 
-</div>
+  generatePrimeList();
+  document.getElementById("defaultOpen").click();
+
+});
+</script>
 </body>
 </html>
