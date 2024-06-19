@@ -71,12 +71,14 @@
             <br>&nbsp;<br>
             <div id="time-report"><i><small></small></i></div>
             <br>&nbsp;<br>
+          </div>
 
             <!-- The values the program created -->
+          <div id="key-param-area">
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-                <small class="font-monospace text-body-secondary">First Prime (p)</small>
-                <div classs="d-flex ms-auto">
+                <label class="font-monospace text-body-secondary" for="#p">First Prime (p)</label>
+                <div class="d-flex ms-auto">
                   <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#p">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
                       <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
@@ -85,82 +87,80 @@
                   </button>
                 </div>
               </div>
-              <div>
-                <textarea type="text" class="font-monospace" id="p" rows="4" cols="80" readonly>
-
-                </textarea>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="p" rows="4" readonly></textarea>
               </div>
             </div>
 
-            <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-              <small class="font-monospace text-body-secondary">Second Prime (q)</small>
-              <div classs="d-flex ms-auto">
-                <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#q">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
-                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
-                  </svg>
-                </button>
+            <div class="key-param highlight">
+              <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+                <label for="#q" class="font-monospace text-body-secondary">Second Prime (q)</label>
+                <div class="d-flex ms-auto">
+                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#q">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="q" rows="4" readonly></textarea>
               </div>
             </div>
-            <div class="highlight">
-              <textarea type="text" class="font-monospace" id="q" rows="4" cols="80" readonly>
 
-              </textarea>
-            </div>
-
-            <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-              <small class="font-monospace text-body-secondary">Modulus (p*q)</small>
-              <div classs="d-flex ms-auto">
-                <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#modulus">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
-                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
-                  </svg>
-                </button>
+            <div class="key-param highlight">
+              <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+                <label for="#modulus" class="font-monospace text-body-secondary">Modulus (p*q)</label>
+                <div class="d-flex ms-auto">
+                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#modulus">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="modulus" rows="6" readonly></textarea>
               </div>
             </div>
-            <div class="highlight">
-              <textarea type="text" class="font-monospace" id="modulus" rows="6" cols="80" readonly>
 
-              </textarea>
-            </div>
-
-            <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-              <small class="font-monospace text-body-secondary">Private Key</small>
-              <div classs="d-flex ms-auto">
-                <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#privkey">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
-                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
-                  </svg>
-                </button>
+            <div class="key-param highlight">
+              <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+                <label for="#privkey" class="font-monospace text-body-secondary">Private Key</label>
+                <div class="d-flex ms-auto">
+                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#privkey">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="privkey" rows="6" readonly></textarea>
               </div>
             </div>
-            <div class="highlight">
-              <textarea type="text" class="font-monospace" id="privkey" rows="6" cols="80" readonly>
 
-              </textarea>
-            </div>
-
-            <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-              <small class="font-monospace text-body-secondary">Public Key</small>
-              <div classs="d-flex ms-auto">
-                <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#pubkey">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
-                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
-                  </svg>
-                </button>
+            <div class="key-param highlight">
+              <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+                <label for="#pubkey" class="font-monospace text-body-secondary">Public Key</label>
+                <div class="d-flex ms-auto">
+                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#pubkey">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
-            </div>
-            <div class="highlight">
-              <textarea type="text" class="font-monospace" id="pubkey" rows="6" cols="80" readonly>
-
-              </textarea>
+              <div class="highlight key-param-value">
+                <textarea type="text" class="font-monospace" id="pubkey" rows="6" readonly></textarea>
+              </div>
             </div>
           </div>
-        </div> <!-- End Key Generation Pane -->
+        </div>
 
 
         <!-- start encrypt decrypt section -->
@@ -172,15 +172,15 @@
               <div id="textInArea">
                 <div class="col-lg-5">
                   <label>Paste Key Here:</label><br/>
-                  <textarea id="privkeyInput" class="privpubInput" rows="15" cols="70"></textarea>
+                  <textarea id="privkeyInput" class="privpubInput font-monospace" rows="15" cols="70"></textarea>
                 </div>
                 <div class="col-lg-5">
-                  <label for="input">Paste text here:</label><br/>
-                  <textarea id="input" name="input" class="privpubInput" cols="70" rows="4"></textarea>
+                  <label for="input">Paste plain text here:</label><br/>
+                  <textarea id="input" name="input" class="font-monospace privpubInput" cols="70" rows="4"></textarea>
                 </div>
                 <div class="col-lg-5">
                   <label for="inputctext">Paste cipher text here:</label><br/>
-                  <textarea id="inputctext" name="inputctext" class="privpubInput" cols="70" rows="4"></textarea>
+                  <textarea id="inputctext" name="inputctext" class="privpubInput font-monospace" cols="70" rows="4"></textarea>
                 </div>
                 <div class="col-lg-2">
                   <label>&nbsp;</label><br/>
@@ -190,12 +190,12 @@
               <div id="cipherTextOutArea">
                 
                 <div class="col-lg-5">
-                  <label for="crypted">Result:</label><br/>
-                  <textarea id="crypted" class="results" name="crypted" cols="70" rows="4" disabled></textarea>
+                  <label for="crypted">Result (base64):</label><br/>
+                  <textarea id="crypted" class="results font-monospace" name="crypted" cols="70" rows="4" disabled></textarea>
                 </div>
                 <div class="col-lg-5">
                   <label for="hex">Result (hex):</label><br/>
-                  <textarea id="hex" class="results" name="hex" cols="70" rows="4" disabled></textarea>
+                  <textarea id="hex" class="results font-monospace" name="hex" cols="70" rows="4" disabled></textarea>
                 </div>
               </div>
             </div>
