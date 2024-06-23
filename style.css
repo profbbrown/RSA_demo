@@ -22,34 +22,16 @@ h3 {
   padding-bottom: 20px;
 }
 /* Style the buttons inside the tab */
-.tab button {
-  background-color: inherit;
+.nav-item button {
+  background-color: hsl(211, 96%, 81%) ;
   float: left;
-  border-top:solid 1px #9bccff;
-  border-bottom:solid 1px #9bccff;
-  border-left: solid 1px #9bccff;
-  border-right: solid 1px #9bccff;
+
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
   font-size: 17px;
 }
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: hsl(211, 100%, 80%);
-  
-}
-/* Background color when hovering over tab */
-.tab button:hover {
-  background-color:#b7daff
-}
-/* Border color whilst hovering tab */
-.tab button:hover {
-  border-top:solid 1px #0e2d4e;
-  border-bottom:solid 1px #0e2d4e;
-  border-left:solid  1px #0e2d4e;
-  border-right:solid 1px #0e2d4e;
-}
+
 /* Style the tab content */
 .tabcontent {
   display: none;
@@ -150,4 +132,23 @@ h3 {
 
 .key-param-value textarea {
   width: 100%;
+}
+/* top bar settings */
+header {
+  background-color: #9bccff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+/* tab settings */
+.nav-item {
+  background-color: #9bccff;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+}
+.nav-item:hover {
+  background-color:#b7daff
+}
+button.nav-link.active{
+  background-color: #b7daff !important;
+  
 }
