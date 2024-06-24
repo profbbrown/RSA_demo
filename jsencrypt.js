@@ -2997,7 +2997,7 @@ var RSAKey = /** @class */ (function () {
     };
     // RSAKey.prototype.generate = RSAGenerate;
     // Generate a new random private key B bits long, using public expt E
-    RSAKey.prototype.generate = function (B, E) {
+    RSAKey.prototype.generateOld = function (B, E) {
         var rng = new SecureRandom();
         var qs = B >> 1;
         this.e = parseInt(E, 16);
@@ -3015,6 +3015,57 @@ var RSAKey = /** @class */ (function () {
                     break;
                 }
             }
+            if (this.p.compareTo(this.q) <= 0) {
+                var t = this.p;
+                this.p = this.q;
+                this.q = t;
+            }
+            var p1 = this.p.subtract(BigInteger.ONE);
+            var q1 = this.q.subtract(BigInteger.ONE);
+            var phi = p1.multiply(q1);
+            if (phi.gcd(ee).compareTo(BigInteger.ONE) == 0) {
+                this.n = this.p.multiply(this.q);
+                this.d = ee.modInverse(phi);
+                this.dmp1 = this.d.mod(p1);
+                this.dmq1 = this.d.mod(q1);
+                this.coeff = this.q.modInverse(this.p);
+                break;
+            }
+        }
+    };
+    // RSAKey.prototype.generate = RSAGenerate;
+    // Generate a new random private key B bits long, using public expt E
+    // and primes P and Q. The primes, if present, are assumed to be correct.
+    // If either prime is not defined, it will be generated.
+    RSAKey.prototype.generate = function (B, E, P, Q) {
+        var rng = new SecureRandom();
+        var qs = B >> 1;
+        this.e = parseInt(E, 16);
+        var ee = new BigInteger(E, 16);
+        var pp = P !== undefined ? new BigInteger(P, 10) : undefined;
+        var qq = Q !== undefined ? new BigInteger(Q, 10) : undefined;
+
+        for (;;) {
+            if (pp === undefined)
+                for (;;) {
+                    this.p = new BigInteger(B - qs, 1, rng);
+                    if (this.p.subtract(BigInteger.ONE).gcd(ee).compareTo(BigInteger.ONE) == 0 && this.p.isProbablePrime(10)) {
+                        break;
+                    }
+                }
+            else
+                this.p = pp;
+
+            if (qq === undefined)
+                for (;;) {
+                    this.q = new BigInteger(qs, 1, rng);
+                    if (this.q.subtract(BigInteger.ONE).gcd(ee).compareTo(BigInteger.ONE) == 0 && this.q.isProbablePrime(10)) {
+                        break;
+                    }
+                }
+            else
+                this.q = qq;
+
             if (this.p.compareTo(this.q) <= 0) {
                 var t = this.p;
                 this.p = this.q;
@@ -5220,6 +5271,8 @@ var JSEncrypt = /** @class */ (function () {
         options = options || {};
         this.default_key_size = parseInt(options.default_key_size, 10) || 1024;
         this.default_public_exponent = options.default_public_exponent || "010001"; // 65537 default openssl public exponent for rsa key type
+        this.prime1 = options.prime1 || undefined;
+        this.prime2 = options.prime2 || undefined;
         this.log = options.log || false;
         // The private and public key.
         this.key = null;
@@ -5367,7 +5420,7 @@ var JSEncrypt = /** @class */ (function () {
                 return;
             }
             // Generate the key.
-            this.key.generate(this.default_key_size, this.default_public_exponent);
+            this.key.generate(this.default_key_size, this.default_public_exponent, this.prime1, this.prime2);
         }
         return this.key;
     };
