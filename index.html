@@ -73,13 +73,20 @@
             <br>&nbsp;<br>
           </div>
 
-            <!-- The values the program created -->
+          <!-- The values the program created -->
+          <!-- First prime -->
           <div id="key-param-area">
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
                 <label class="font-monospace text-body-secondary" for="#p">First Prime (p)</label>
-                <div class="d-flex ms-auto">
-                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#p">
+                <div class="d-flex btn-bar">
+                  <button type="button" class="btn-edit" id="edit-p" aria-label="Edit value">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                    </svg>
+                  </button>
+
+                  <button type="button" class="btn-clipboard" aria-label="Copy to clipboard" data-clipboard-target="#p">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
                       <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
                       <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
@@ -92,11 +99,17 @@
               </div>
             </div>
 
+            <!-- Second prime -->
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
                 <label for="#q" class="font-monospace text-body-secondary">Second Prime (q)</label>
-                <div class="d-flex ms-auto">
-                  <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#q">
+                <div class="d-flex btn-bar">
+                  <button type="button" class="btn-edit" id="edit-q" aria-label="Edit value">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                    </svg>
+                  </button>
+                  <button type="button" class="btn-clipboard" aria-label="Copy to clipboard" data-clipboard-target="#q">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
                       <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
                       <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
@@ -109,6 +122,7 @@
               </div>
             </div>
 
+            <!-- Modulus -->
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
                 <label for="#modulus" class="font-monospace text-body-secondary">Modulus (p*q)</label>
@@ -126,6 +140,7 @@
               </div>
             </div>
 
+            <!-- Private key -->
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
                 <label for="#privkey" class="font-monospace text-body-secondary">Private Key</label>
@@ -143,6 +158,7 @@
               </div>
             </div>
 
+            <!-- Public key -->
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
                 <label for="#pubkey" class="font-monospace text-body-secondary">Public Key</label>
@@ -163,7 +179,7 @@
         </div>
 
 
-        <!-- start encrypt decrypt section -->
+        <!-- Encrypt decrypt pane -->
         <div class="tab-pane" id="encryptDecrypt-pane" role="tabpanel" tabindex="0">
         <div class="row">
           <div class="panel panel-default">
@@ -260,99 +276,121 @@ $(function () {
   new ClipboardJS('.btn-clipboard');
     
   $('#loading').hide();
+
+  // When the edit button is clicked, the p textarea is editable
+  $('#edit-p').click(function() {
+    $('#p').removeAttr('readonly');
+  });
+
+  // When the edit button is clicked, the q textarea is editable
+  $('#edit-q').click(function() {
+    $('#q').removeAttr('readonly');
+  });
       
-    // Execute when they click the encrypt/decrypt button.
-    //Changing this function
-    $('#execute').click(function () {
-      // Create the encryption object.
-      var crypt = new JSEncrypt();
-      // Set the private.
-      crypt.setPrivateKey($('#privkeyInput').val());
-      //return;
-      // If no public key is set then set it here...
-      var pubkey = $('#privkeyInput').val();
-      if (!pubkey) {
-        $('#privkeyInput').val(crypt.getPublicKey());
+  // Execute when they click the encrypt/decrypt button.
+  //Changing this function
+  $('#execute').click(function () {
+    // Create the encryption object.
+    var crypt = new JSEncrypt();
+    // Set the private.
+    crypt.setPrivateKey($('#privkeyInput').val());
+    //return;
+    // If no public key is set then set it here...
+    var pubkey = $('#privkeyInput').val();
+    if (!pubkey) {
+      $('#privkeyInput').val(crypt.getPublicKey());
+    }
+    /*
+    the variable p is used to check if the key given is a public one or a private one.  The public keys do not contain p or q values while the private keys do.  As such, this is used to determine if there is a p or q value.
+    */
+    var p = crypt.getP();
+
+    // Get the input and crypted values.
+    var input = $('#input').val();
+    var crypted = $('#inputctext').val();
+    //var crypted = $('#crypted').val();
+    var hexCode = "";
+    // Alternate the values.
+    if (input) {
+      if(!crypt.getP()) { //this is a public key
+        $('#crypted').val(crypt.encrypt(input));
+        $('#hex').val(crypt.convertToHex(crypt.encrypt(input)));
       }
-      /*
-      the variable p is used to check if the key given is a public one or a private one.  The public keys do not contain p or q values while the private keys do.  As such, this is used to determine if there is a p or q value.
-      */
-      var p = crypt.getP();
-
-      // Get the input and crypted values.
-      var input = $('#input').val();
-      var crypted = $('#inputctext').val();
-      //var crypted = $('#crypted').val();
-      var hexCode = "";
-      // Alternate the values.
-      if (input) {
-        if(!crypt.getP()) { //this is a public key
-          $('#crypted').val(crypt.encrypt(input));
-          $('#hex').val(crypt.convertToHex(crypt.encrypt(input)));
-        }
-        else {
-          $('#crypted').val(crypt.encryptWithPrivate(input));
-          $('#hex').val(crypt.convertToHex(crypt.encryptWithPrivate(input)));
-        }
-        //$('#input').val('');
+      else {
+        $('#crypted').val(crypt.encryptWithPrivate(input));
+        $('#hex').val(crypt.convertToHex(crypt.encryptWithPrivate(input)));
       }
-      else if (crypted) {
-        var decrypted = "";
-        if(!crypt.getP()) {
-          decrypted = crypt.decryptWithPublic(crypted);
-          hexDecrypted = crypt.convertToHex(decrypted);
-        }
-        else {
-          decrypted = crypt.decrypt(crypted);
-          hexDecrypted = crypt.convertToHex(decrypted);
-        }
-
-        $('#crypted').val(decrypted);
-        $('#hex').val()
+      //$('#input').val('');
+    }
+    else if (crypted) {
+      var decrypted = "";
+      if(!crypt.getP()) {
+        decrypted = crypt.decryptWithPublic(crypted);
+        hexDecrypted = crypt.convertToHex(decrypted);
       }
-    });
+      else {
+        decrypted = crypt.decrypt(crypted);
+        hexDecrypted = crypt.convertToHex(decrypted);
+      }
 
-    $('#generate').click( function() {
-      $('#loading').show();
-      setTimeout(function() {
-        var sKeySize = $('#key-size').val();
-        var keySize = parseInt(sKeySize);
-        //set the p and q values given from the user
-        //get the public exponent
-        var e = parseInt($("#public-exponent").val()).toString(16);
+      $('#crypted').val(decrypted);
+      $('#hex').val()
+    }
+  });
 
-        var crypt = new JSEncrypt({default_key_size: keySize, default_public_exponent: e});
-        var async = $('#async-ck').is(':checked');
-        var dt = new Date();
-        var time = -(dt.getTime());
-        if (async) {
-          $('#time-report').text('.');
-          var load = setInterval(function () {
-            var text = $('#time-report').text();
-            $('#time-report').text(text + '.');
-          }, 500);
-          crypt.getKey(function () {
-            clearInterval(load);
-            dt = new Date();
-            time += (dt.getTime());
-            $('#time-report').text('Generated in ' + time + ' ms');
-            $('#privkey').val(crypt.getPrivateKey());
-            $('#pubkey').val(crypt.getPublicKey());
-          });
-          return;
-        }
-        crypt.getKey();
-        dt = new Date();
-        time += (dt.getTime());
-        $('#time-report').text('Generated in ' + time + ' ms');
-        $('#privkey').val(crypt.getPrivateKey());
-        $('#pubkey').val(crypt.getPublicKey());
-        $('#p').val(crypt.getP());
-        $('#q').val(crypt.getQ());
-        $('#modulus').val(crypt.getN());
-        $('#loading').hide();
-      }, 0);
-    });
+  $('#generate').click( function() {
+    $('#loading').show();
+    setTimeout(function() {
+      var sKeySize = $('#key-size').val();
+      var keySize = parseInt(sKeySize);
+      //set the p and q values given from the user
+      //get the public exponent
+      var e = parseInt($("#public-exponent").val()).toString(16);
+
+      var options = {
+        default_key_size: keySize,
+        default_public_exponent: e
+      };
+
+      if ($('#p').attr('readonly') === undefined) {
+        options.prime1 = $('#p').val();
+      }
+      if ($('#q').attr('readonly') === undefined) {
+        options.prime2 = $('#q').val();
+      }
+
+      var crypt = new JSEncrypt(options);
+      var async = $('#async-ck').is(':checked');
+      var dt = new Date();
+      var time = -(dt.getTime());
+      if (async) {
+        $('#time-report').text('.');
+        var load = setInterval(function () {
+          var text = $('#time-report').text();
+          $('#time-report').text(text + '.');
+        }, 500);
+        crypt.getKey(function () {
+          clearInterval(load);
+          dt = new Date();
+          time += (dt.getTime());
+          $('#time-report').text('Generated in ' + time + ' ms');
+          $('#privkey').val(crypt.getPrivateKey());
+          $('#pubkey').val(crypt.getPublicKey());
+        });
+        return;
+      }
+      crypt.getKey();
+      dt = new Date();
+      time += (dt.getTime());
+      $('#time-report').text('Generated in ' + time + ' ms');
+      $('#privkey').val(crypt.getPrivateKey());
+      $('#pubkey').val(crypt.getPublicKey());
+      $('#p').val(crypt.getP());
+      $('#q').val(crypt.getQ());
+      $('#modulus').val(crypt.getN());
+      $('#loading').hide();
+    }, 0);
+  });
 
   generatePrimeList();
   document.getElementById("defaultOpen").click();
