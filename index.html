@@ -329,11 +329,17 @@ $(function () {
       var decrypted = "";
       if(!crypt.getP()) {
         decrypted = crypt.decryptWithPublic(crypted);
-        hexDecrypted = crypt.convertToHex(decrypted);
+        if (decrypted)
+            hexDecrypted = crypt.convertToHex(decrypted);
+        else
+            decrypted = "Unable to decrypt";
       }
       else {
         decrypted = crypt.decrypt(crypted);
-        hexDecrypted = crypt.convertToHex(decrypted);
+        if (decrypted)
+            hexDecrypted = crypt.convertToHex(decrypted);
+        else
+            decrypted = "Unable to decrypt";
       }
 
       $('#crypted').val(decrypted);
@@ -396,7 +402,7 @@ $(function () {
   });
 
   generatePrimeList();
-  document.getElementById("defaultOpen").click();
+  //document.getElementById("defaultOpen").click();
 
 });
 </script>
