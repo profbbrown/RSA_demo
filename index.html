@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <!-- Majority of this code was from JSEncrypt. -->
   <!-- Additional features such as private key encryption, public key decryption, and displaying the results in hex were written by Michael Rose -->
@@ -81,7 +81,7 @@
           <div id="key-param-area">
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-                <label class="font-monospace text-body-secondary" for="#p">First Prime (p)</label>
+                <label class="font-monospace text-body-secondary" for="p">First Prime (p)</label>
                 <div class="d-flex btn-bar">
                   <button type="button" class="btn-edit" id="edit-p" aria-label="Edit value">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -105,7 +105,7 @@
             <!-- Second prime -->
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-                <label for="#q" class="font-monospace text-body-secondary">Second Prime (q)</label>
+                <label for="q" class="font-monospace text-body-secondary">Second Prime (q)</label>
                 <div class="d-flex btn-bar">
                   <button type="button" class="btn-edit" id="edit-q" aria-label="Edit value">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -128,7 +128,7 @@
             <!-- Modulus -->
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-                <label for="#modulus" class="font-monospace text-body-secondary">Modulus (p*q)</label>
+                <label for="modulus" class="font-monospace text-body-secondary">Modulus (p*q)</label>
                 <div class="d-flex ms-auto">
                   <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#modulus">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
@@ -146,7 +146,7 @@
             <!-- Private key -->
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-                <label for="#privkey" class="font-monospace text-body-secondary">Private Key</label>
+                <label for="privkey" class="font-monospace text-body-secondary">Private Key</label>
                 <div class="d-flex ms-auto">
                   <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#privkey">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
@@ -164,7 +164,7 @@
             <!-- Public key -->
             <div class="key-param highlight">
               <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
-                <label for="#pubkey" class="font-monospace text-body-secondary">Public Key</label>
+                <label for="pubkey" class="font-monospace text-body-secondary">Public Key</label>
                 <div class="d-flex ms-auto">
                   <button type="button" class="btn-clipboard mt-0 me-0" aria-label="Copy to clipboard" data-clipboard-target="#pubkey">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
@@ -190,7 +190,7 @@
             <div class="panel-body">
               <div id="textInArea">
                 <div class="col-lg-5">
-                  <label>Paste Key Here:</label><br/>
+                  <label for="privkeyInput">Paste Key Here:</label><br/>
                   <textarea id="privkeyInput" class="privpubInput font-monospace" rows="15" cols="70"></textarea>
                 </div>
                 <div class="col-lg-5">
@@ -202,7 +202,7 @@
                   <textarea id="inputctext" name="inputctext" class="privpubInput font-monospace" cols="70" rows="4"></textarea>
                 </div>
                 <div class="col-lg-2">
-                  <label>&nbsp;</label><br/>
+                  <div aria-hidden="true">&nbsp;</div><br/>
                   <button id="execute" class="btn btn-primary">Encrypt / Decrypt</button>
                 </div>
               </div>
@@ -303,47 +303,45 @@ $(function () {
     if (!pubkey) {
       $('#privkeyInput').val(crypt.getPublicKey());
     }
-    /*
-    the variable p is used to check if the key given is a public one or a private one.  The public keys do not contain p or q values while the private keys do.  As such, this is used to determine if there is a p or q value.
-    */
-    var p = crypt.getP();
-
     // Get the input and crypted values.
     var input = $('#input').val();
     var crypted = $('#inputctext').val();
-    //var crypted = $('#crypted').val();
-    var hexCode = "";
     // Alternate the values.
     if (input) {
+      var encrypted = "";
       if(!crypt.getP()) { //this is a public key
-        $('#crypted').val(crypt.encrypt(input));
-        $('#hex').val(crypt.convertToHex(crypt.encrypt(input)));
+        encrypted = crypt.encrypt(input);
       }
       else {
-        $('#crypted').val(crypt.encryptWithPrivate(input));
-        $('#hex').val(crypt.convertToHex(crypt.encryptWithPrivate(input)));
+        encrypted = crypt.encryptWithPrivate(input);
       }
-      //$('#input').val('');
+
+      if (encrypted) {
+        $('#crypted').val(encrypted);
+        $('#hex').val(crypt.convertToHex(encrypted));
+      }
+      else {
+        $('#crypted').val('Unable to encrypt');
+        $('#hex').val('');
+      }
     }
     else if (crypted) {
       var decrypted = "";
       if(!crypt.getP()) {
         decrypted = crypt.decryptWithPublic(crypted);
-        if (decrypted)
-            hexDecrypted = crypt.convertToHex(decrypted);
-        else
-            decrypted = "Unable to decrypt";
       }
       else {
         decrypted = crypt.decrypt(crypted);
-        if (decrypted)
-            hexDecrypted = crypt.convertToHex(decrypted);
-        else
-            decrypted = "Unable to decrypt";
       }
 
-      $('#crypted').val(decrypted);
-      $('#hex').val()
+      if (decrypted) {
+        $('#crypted').val(decrypted);
+        $('#hex').val(crypt.convertToHex(decrypted));
+      }
+      else {
+        $('#crypted').val('Unable to decrypt');
+        $('#hex').val('');
+      }
     }
   });
 
