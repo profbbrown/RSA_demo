@@ -284,6 +284,20 @@ var textToHex = function (str) {
   return hex.trim();
 };
 
+var normalizePemKey = function (pemText) {
+  if (!pemText) {
+    return pemText;
+  }
+
+  return pemText.split(/\r?\n/).map(function (line) {
+    var match = line.match(/^\s*-*\s*(BEGIN|END)\s+([A-Z0-9 ]+?KEY)\s*-*\s*$/i);
+    if (!match) {
+      return line;
+    }
+    return "-----" + match[1].toUpperCase() + " " + match[2].toUpperCase().replace(/\s+/g, ' ').trim() + "-----";
+  }).join('\n');
+};
+
 
 $(function () {
   new ClipboardJS('.btn-clipboard');
@@ -337,11 +351,12 @@ $(function () {
   $('#execute').click(function () {
     // Create the encryption object.
     var crypt = new JSEncrypt();
+    var normalizedKey = normalizePemKey($('#privkeyInput').val());
     // Set the private.
-    crypt.setPrivateKey($('#privkeyInput').val());
+    crypt.setPrivateKey(normalizedKey);
     //return;
     // If no public key is set then set it here...
-    var pubkey = $('#privkeyInput').val();
+    var pubkey = normalizedKey;
     if (!pubkey) {
       $('#privkeyInput').val(crypt.getPublicKey());
     }
