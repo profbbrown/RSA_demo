@@ -184,45 +184,52 @@
 
         <!-- Encrypt decrypt pane -->
         <div class="tab-pane" id="encryptDecrypt-pane" role="tabpanel" tabindex="0">
-        <div class="row">
-          <div class="panel panel-default">
-            <div class="panel-heading" id="encryptionHeading"><h3>RSA Encryption Test</h3></div>
-            <div class="panel-body">
-              <div id="textInArea">
-                <div id="operation-mode" class="form-text mb-2">Mode: Enter plain text to encrypt or cipher text to decrypt.</div>
-                <div class="col-lg-5">
-                  <label for="privkeyInput">Paste Key Here:</label><br/>
-                  <textarea id="privkeyInput" class="privpubInput font-monospace" rows="15" cols="70"></textarea>
-                </div>
-                <div class="col-lg-5">
-                  <label for="input">Paste plain text here:</label><br/>
-                  <textarea id="input" name="input" class="font-monospace privpubInput" cols="70" rows="4"></textarea>
-                </div>
-                <div class="col-lg-5">
-                  <label for="inputctext">Paste cipher text here:</label><br/>
-                  <textarea id="inputctext" name="inputctext" class="privpubInput font-monospace" cols="70" rows="4"></textarea>
-                </div>
-                <div class="col-lg-2">
-                  <div aria-hidden="true">&nbsp;</div><br/>
-                  <button id="execute" class="btn btn-primary">Encrypt / Decrypt</button>
-                </div>
-              </div>
-              <div id="cipherTextOutArea">
-                
-                <div class="col-lg-5">
-                  <label for="crypted">Result (base64):</label><br/>
-                  <textarea id="crypted" class="results font-monospace" name="crypted" cols="70" rows="4" disabled></textarea>
-                </div>
-                <div class="col-lg-5">
-                  <label for="hex">Result (hex):</label><br/>
-                  <textarea id="hex" class="results font-monospace" name="hex" cols="70" rows="4" disabled></textarea>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header" id="encryptionHeading"><h3 class="h5 mb-0">RSA Encryption Test</h3></div>
+                <div class="card-body">
+                  <div id="textInArea" class="row g-3">
+                    <div class="col-12">
+                      <div id="operation-mode" class="form-text">Mode: Enter plain text to encrypt or cipher text to decrypt.</div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                      <label for="privkeyInput" class="form-label">Paste Key Here:</label>
+                      <textarea id="privkeyInput" class="privpubInput font-monospace form-control" rows="15"></textarea>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                      <div class="row g-3">
+                        <div class="col-12">
+                          <label for="input" class="form-label">Paste plain text here:</label>
+                          <textarea id="input" name="input" class="font-monospace privpubInput form-control" rows="4"></textarea>
+                        </div>
+                        <div class="col-12">
+                          <label for="inputctext" class="form-label">Paste cipher text here:</label>
+                          <textarea id="inputctext" name="inputctext" class="privpubInput font-monospace form-control" rows="4"></textarea>
+                        </div>
+                        <div class="col-12">
+                          <button id="execute" class="btn btn-primary">Encrypt / Decrypt</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="cipherTextOutArea" class="row g-3 mt-1">
+                    <div class="col-12 col-lg-6">
+                      <label for="crypted" class="form-label">Result (base64):</label>
+                      <textarea id="crypted" class="results font-monospace form-control" name="crypted" rows="4" disabled></textarea>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                      <label for="hex" class="form-label">Result (hex):</label>
+                      <textarea id="hex" class="results font-monospace form-control" name="hex" rows="4" disabled></textarea>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-  </div>
-  </div>
+      </div>
+    </div>
   </main>
 </div>
 
