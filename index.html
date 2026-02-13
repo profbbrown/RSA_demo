@@ -274,6 +274,15 @@ var generateKeys = function () {
   $('#modulus').val(crypt.getN());
 };
 
+var textToHex = function (str) {
+  var bytes = new TextEncoder().encode(str);
+  var hex = "";
+  for (var i = 0; i < bytes.length; i++) {
+    hex += bytes[i].toString(16).padStart(2, '0') + " ";
+  }
+  return hex.trim();
+};
+
 
 $(function () {
   new ClipboardJS('.btn-clipboard');
@@ -336,7 +345,7 @@ $(function () {
 
       if (decrypted) {
         $('#crypted').val(decrypted);
-        $('#hex').val(crypt.convertToHex(decrypted));
+        $('#hex').val(textToHex(decrypted));
       }
       else {
         $('#crypted').val('Unable to decrypt');
@@ -347,6 +356,7 @@ $(function () {
 
   $('#generate').click( function() {
     $('#loading').show();
+    $('#generate').prop('disabled', true);
     setTimeout(function() {
       var sKeySize = $('#key-size').val();
       var keySize = parseInt(sKeySize);
@@ -367,35 +377,26 @@ $(function () {
       }
 
       var crypt = new JSEncrypt(options);
-      var async = $('#async-ck').is(':checked');
       var dt = new Date();
       var time = -(dt.getTime());
-      if (async) {
-        $('#time-report').text('.');
-        var load = setInterval(function () {
-          var text = $('#time-report').text();
-          $('#time-report').text(text + '.');
-        }, 500);
-        crypt.getKey(function () {
-          clearInterval(load);
-          dt = new Date();
-          time += (dt.getTime());
-          $('#time-report').text('Generated in ' + time + ' ms');
-          $('#privkey').val(crypt.getPrivateKey());
-          $('#pubkey').val(crypt.getPublicKey());
-        });
-        return;
-      }
-      crypt.getKey();
-      dt = new Date();
-      time += (dt.getTime());
-      $('#time-report').text('Generated in ' + time + ' ms');
-      $('#privkey').val(crypt.getPrivateKey());
-      $('#pubkey').val(crypt.getPublicKey());
-      $('#p').val(crypt.getP());
-      $('#q').val(crypt.getQ());
-      $('#modulus').val(crypt.getN());
-      $('#loading').hide();
+      $('#time-report').text('.');
+      var load = setInterval(function () {
+        var text = $('#time-report').text();
+        $('#time-report').text(text + '.');
+      }, 500);
+      crypt.getKey(function () {
+        clearInterval(load);
+        dt = new Date();
+        time += (dt.getTime());
+        $('#time-report').text('Generated in ' + time + ' ms');
+        $('#privkey').val(crypt.getPrivateKey());
+        $('#pubkey').val(crypt.getPublicKey());
+        $('#p').val(crypt.getP());
+        $('#q').val(crypt.getQ());
+        $('#modulus').val(crypt.getN());
+        $('#loading').hide();
+        $('#generate').prop('disabled', false);
+      });
     }, 0);
   });
 
