@@ -242,46 +242,6 @@ var generatePrimeList = function () {
   }
 };
 
-var generateKeys = function () {
-  var sKeySize = $('#key-size').val();
-  var keySize = parseInt(sKeySize);
-  //set the p and q values given from the user
-  //get the public exponent
-  var e = parseInt($("#public-exponent").val()).toString(16);
-
-  var crypt = new JSEncrypt({default_key_size: keySize, default_public_exponent: e});
-  var async = $('#async-ck').is(':checked');
-  var dt = new Date();
-  var time = -(dt.getTime());
-  if (async) {
-    $('#time-report').text('.');
-    var load = setInterval(function () {
-      var text = $('#time-report').text();
-      $('#time-report').text(text + '.');
-    }, 500);
-    
-    crypt.getKey(function () {
-      clearInterval(load);
-      dt = new Date();
-      time += (dt.getTime());
-      $('#time-report').text('Generated in ' + time + ' ms');
-      $('#privkey').val(crypt.getPrivateKey());
-      $('#pubkey').val(crypt.getPublicKey());
-    });
-  return;
-  }
-      
-  crypt.getKey();
-  dt = new Date();
-  time += (dt.getTime());
-  $('#time-report').text('Generated in ' + time + ' ms');
-  $('#privkey').val(crypt.getPrivateKey());
-  $('#pubkey').val(crypt.getPublicKey());
-  $('#p').val(crypt.getP());
-  $('#q').val(crypt.getQ());
-  $('#modulus').val(crypt.getN());
-};
-
 var textToHex = function (str) {
   var bytes = new TextEncoder().encode(str);
   var hex = "";
