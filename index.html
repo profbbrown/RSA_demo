@@ -189,6 +189,7 @@
             <div class="panel-heading" id="encryptionHeading"><h3>RSA Encryption Test</h3></div>
             <div class="panel-body">
               <div id="textInArea">
+                <div id="operation-mode" class="form-text mb-2">Mode: Enter plain text to encrypt or cipher text to decrypt.</div>
                 <div class="col-lg-5">
                   <label for="privkeyInput">Paste Key Here:</label><br/>
                   <textarea id="privkeyInput" class="privpubInput font-monospace" rows="15" cols="70"></textarea>
@@ -298,6 +299,38 @@ $(function () {
   $('#edit-q').click(function() {
     $('#q').removeAttr('readonly');
   });
+
+  var updateOperationMode = function () {
+    var input = $('#input').val().trim();
+    var cipher = $('#inputctext').val().trim();
+
+    if (input) {
+      $('#operation-mode').text('Mode: Encrypt');
+      $('#execute').text('Encrypt');
+    }
+    else if (cipher) {
+      $('#operation-mode').text('Mode: Decrypt');
+      $('#execute').text('Decrypt');
+    }
+    else {
+      $('#operation-mode').text('Mode: Enter plain text to encrypt or cipher text to decrypt.');
+      $('#execute').text('Encrypt / Decrypt');
+    }
+  };
+
+  $('#input').on('input', function () {
+    if ($(this).val().length > 0) {
+      $('#inputctext').val('');
+    }
+    updateOperationMode();
+  });
+
+  $('#inputctext').on('input', function () {
+    if ($(this).val().length > 0) {
+      $('#input').val('');
+    }
+    updateOperationMode();
+  });
       
   // Execute when they click the encrypt/decrypt button.
   //Changing this function
@@ -353,6 +386,8 @@ $(function () {
       }
     }
   });
+
+  updateOperationMode();
 
   $('#generate').click( function() {
     $('#loading').show();
