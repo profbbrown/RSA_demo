@@ -3106,12 +3106,14 @@ var RSAKey = /** @class */ (function () {
     };
 
     // Generate a new random private key B bits long, using public expt E
-    RSAKey.prototype.generateAsync = function (B, E, callback) {
+    RSAKey.prototype.generateAsync = function (B, E, callback, P, Q) {
         var rng = new SecureRandom();
         var qs = B >> 1;
         this.e = parseInt(E, 16);
         var ee = new BigInteger(E, 16);
         var rsa = this;
+        var pp = P !== undefined ? new BigInteger(P, 10) : undefined;
+        var qq = Q !== undefined ? new BigInteger(Q, 10) : undefined;
         // These functions have non-descript names because they were originally for(;;) loops.
         // I don't know about cryptography to give them better names than loop1-4.
         var loop1 = function () {
@@ -3137,6 +3139,11 @@ var RSAKey = /** @class */ (function () {
                 }
             };
             var loop3 = function () {
+                if (qq !== undefined) {
+                    rsa.q = qq;
+                    setTimeout(loop4, 0);
+                    return;
+                }
                 rsa.q = nbi();
                 rsa.q.fromNumberAsync(qs, 1, rng, function () {
                     rsa.q.subtract(BigInteger.ONE).gcda(ee, function (r) {
@@ -3150,6 +3157,11 @@ var RSAKey = /** @class */ (function () {
                 });
             };
             var loop2 = function () {
+                if (pp !== undefined) {
+                    rsa.p = pp;
+                    setTimeout(loop3, 0);
+                    return;
+                }
                 rsa.p = nbi();
                 rsa.p.fromNumberAsync(B - qs, 1, rng, function () {
                     rsa.p.subtract(BigInteger.ONE).gcda(ee, function (r) {
@@ -5416,7 +5428,7 @@ var JSEncrypt = /** @class */ (function () {
             // Get a new private key.
             this.key = new JSEncryptRSAKey();
             if (cb && {}.toString.call(cb) === "[object Function]") {
-                this.key.generateAsync(this.default_key_size, this.default_public_exponent, cb);
+                this.key.generateAsync(this.default_key_size, this.default_public_exponent, cb, this.prime1, this.prime2);
                 return;
             }
             // Generate the key.
